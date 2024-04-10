@@ -615,7 +615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 88.3, y: 138}
+  m_AnchoredPosition: {x: 88.3, y: 94}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1105678356
@@ -667,6 +667,10 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C"
       m_Image: {fileID: 0}
+    - m_Text: "\u0422\u043E\u043B\u043A\u043D\u0443\u0442\u044C"
+      m_Image: {fileID: 0}
+    - m_Text: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -695,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1227,7 +1231,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 534669904}
-  m_PlaneDistance: 0.3
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1335,9 +1339,10 @@ GameObject:
   - component: {fileID: 1852984558}
   - component: {fileID: 1852984557}
   - component: {fileID: 1852984556}
+  - component: {fileID: 1852984560}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Plane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1409,12 +1414,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852984555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4425769, y: -1.94, z: 0.42915535}
+  m_LocalPosition: {x: -1.4425769, y: 0, z: 0.42915535}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1852984560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852984555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6844c9ea9a2b89344995eb528089b1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1886632585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,7 +1627,7 @@ PrefabInstance:
     - target: {fileID: 1820565421809080996, guid: 93aef636911dabe4f81ce5d28f4bdfca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: 2.79
       objectReference: {fileID: 0}
     - target: {fileID: 1820565421809080996, guid: 93aef636911dabe4f81ce5d28f4bdfca,
         type: 3}
