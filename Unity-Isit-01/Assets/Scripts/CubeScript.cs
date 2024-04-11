@@ -18,6 +18,15 @@ public class CubeScript : MonoBehaviour
             return _isSelected;
         }
     }
+    void OnMouseDrag()
+    {
+        if (_isSelected)
+        {
+            float distanceToScreen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+            Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceToScreen);
+            transform.position = Camera.main.ScreenToWorldPoint(newPosition);
+        }        
+    }
 
     private void OnMouseOver()
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -19,14 +18,18 @@ public class GameManager : MonoBehaviour
     private GameObject _pushSpherePrefab;
     private GameObject _tempPushSphere;
 
-    UnityEvent _unselectEvent;    
+    public CubeScript SelectedCube;
+    private float _lastRotationYOfCube = 0f;
+
+    public UnityEvent SelectEvent;
+    public UnityEvent UnselectEvent;
 
     private Transform _objectForPush;
     private Vector3 _pointOfPush;
     private float _currentPushForce = 0f;
 
     float MaxPushForce = 100f;
-    float PushIncreasingSpeed = 0.1f;
+    float PushIncreasingSpeed = 0.05f;
 
     private GameManager() { }
 
@@ -39,10 +42,8 @@ public class GameManager : MonoBehaviour
         {
             if (_singleInstance == null)
             {
-                _singleInstance = new GameManager();
-                GameObject emptyObject = new GameObject();
-                emptyObject.name = "GameManager";
-                _singleInstance = emptyObject.AddComponent<GameManager>();
+                GameObject emptyObject = GameObject.FindGameObjectWithTag("GameController");
+                _singleInstance = emptyObject.GetComponent<GameManager>();
             }
             return _singleInstance;
         }
@@ -50,21 +51,34 @@ public class GameManager : MonoBehaviour
     public void ChangeCursorMode(int cursorMode)
     {
         CurrentCursorMode = (CursorMode)cursorMode;
+        Debug.Log("Changed cursor to another mode");
+        UnselectCube();
     }
 
     void Start()
     {
-        _unselectEvent = new UnityEvent();
         _cubePrefab = Resources.Load<GameObject>("Cube");
         _pushSpherePrefab = Resources.Load<GameObject>("PushSphere");        
     }
 
     void UnselectCube()
     {
-        _unselectEvent.Invoke();
-        _unselectEvent.RemoveAllListeners();
+        if (SelectedCube)
+        {
+            Debug.Log("Unselected Cube");
+            _lastRotationYOfCube = SelectedCube.transform.rotation.eulerAngles.y;
+            SelectedCube.Unselect();
+            SelectedCube = null;
+            UnselectEvent.Invoke();
+        }
     }
 
+    void SelectCube(CubeScript Cube)
+    {
+        SelectedCube = Cube;
+        Cube.Select();        
+        SelectEvent.Invoke();
+    }
 
     void Update()
     {
@@ -99,7 +113,7 @@ public class GameManager : MonoBehaviour
                             Debug.Log($"Cube created on");
                             Vector3 newPosition = new Vector3(hit.point.x, 1f, hit.point.z);
 
-                            Instantiate(_cubePrefab, newPosition, Quaternion.identity);
+                            Instantiate(_cubePrefab, newPosition, Quaternion.Euler(0, _lastRotationYOfCube, 0));
                             break;
                     }                    
                 }
@@ -112,15 +126,13 @@ public class GameManager : MonoBehaviour
                             CubeScript cubeScript = hittedObject.GetComponent<CubeScript>();
                             bool cubeWasSelected = cubeScript.Selected;
 
-                            UnselectCube();
-
-                            // Если куб уже был выбран, то по нажатию мы отменяем выделение, чтобы он не выделился еще раз
                             if (cubeWasSelected)
                             {                                
                                 return;
                             }
-                            cubeScript.Select();
-                            _unselectEvent.AddListener(cubeScript.Unselect);
+
+                            UnselectCube();
+                            SelectCube(cubeScript);
                             break;
 
                         case CursorMode.Push:
@@ -140,7 +152,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && CurrentCursorMode == CursorMode.Push)
         {
             Rigidbody rbOfPushedObject = _objectForPush.GetComponent<Rigidbody>();
-            rbOfPushedObject.AddForceAtPosition(Vector3.forward * _currentPushForce, _pointOfPush);
+            rbOfPushedObject.AddForceAtPosition(rbOfPushedObject.transform.forward * _currentPushForce, _pointOfPush);
 
             Destroy(_tempPushSphere);
             _tempPushSphere = null;
