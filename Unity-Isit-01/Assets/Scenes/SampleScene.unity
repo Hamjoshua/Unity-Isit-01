@@ -408,7 +408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -22.800003, y: -11.5}
+  m_AnchoredPosition: {x: -22.799988, y: -11.5}
   m_SizeDelta: {x: 80, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &214315965
@@ -1869,7 +1869,6 @@ GameObject:
   - component: {fileID: 1852984558}
   - component: {fileID: 1852984557}
   - component: {fileID: 1852984556}
-  - component: {fileID: 1852984560}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Plane
@@ -1950,18 +1949,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1852984560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852984555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6844c9ea9a2b89344995eb528089b1cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1886632585
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,7 +2165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 85.3, y: 61}
+  m_AnchoredPosition: {x: 85.29999, y: 61}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1945484378
